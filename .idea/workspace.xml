@@ -799,12 +799,12 @@
       <workItem from="1519535427256" duration="23166000" />
       <workItem from="1519618865593" duration="22661000" />
       <workItem from="1519709576993" duration="6000" />
-      <workItem from="1519840147766" duration="6175000" />
+      <workItem from="1519840147766" duration="6864000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="767036000" />
+    <option name="totallyTimeSpent" value="767725000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -944,13 +944,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ThinkPHP/Conf/debug.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1312,6 +1305,14 @@
     <entry file="file://$PROJECT_DIR$/tmp005.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-42727">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ThinkPHP/Conf/debug.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
