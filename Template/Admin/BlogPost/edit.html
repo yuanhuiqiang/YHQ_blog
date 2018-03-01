@@ -1,0 +1,674 @@
+<extend name="Common:layout"/>
+<block name="header_css_extra">
+    <!-- editormd -->
+    <link href="__PUBLIC__/vendors/editormd/css/editormd.css" rel="stylesheet">
+</block>
+<block name="page_content">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>文章编辑</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-9 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>文章内容</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12"><h3>标题</h3></label>
+
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" placeholder="填写文章标题" name="post_title">
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="ln_solid"></div>
+                        <div id="alerts"></div>
+
+                        <div id="test-editormd">
+                            <textarea style="display:none;"></textarea>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-12">
+                <!--发布-->
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>发布</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                   <button type="button" class="btn btn-danger  pull-left" onclick="delPost()">删除</button>
+                            <switch name="Think.ACTION_NAME">
+                                <case value="edit"><button type="button" class="btn btn-primary pull-right" onclick="updatePost()">更新</button></case>
+                                <default /><button type="button" class="btn btn-success pull-right" onclick="publicPost()">发布</button>
+                            </switch>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- start accordion -->
+                        <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel">
+                                <a class="panel-heading" style="padding: 5px" role="tab" id="headingOne"
+                                   data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                   aria-expanded="true" aria-controls="collapseOne">
+                                    公开度
+                                </a>
+                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel"
+                                     aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <form action="" class="form-horizontal">
+                                            <div class="form-group">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" checked="" value="1" 
+                                                               name="post_private"> 公开
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" value="2"
+                                                               name="post_private" > 密码保护
+                                                    </label>
+                                                </div>
+                                                <div style="margin-left: 20px;">
+                                                    <input type="password" class="form-control" name="post_password"
+                                                           placeholder="请输入密码" style="display: none;">
+                                                </div>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" value="3"
+                                                               name="post_private"> 私密
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <a class="panel-heading collapsed" style="padding: 5px" role="tab"
+                                   id="headingTwo" data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    时间
+                                </a>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                     aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <form action="" class="form-horizontal">
+
+                                            <div class="form-group">
+                                                <div class='input-group date' id='myDatepicker4'>
+                                                    <input type='text' class="form-control" name="post_date"
+                                                           style="font-size: 12px"
+                                                           readonly="readonly"/>
+                                                    <span class="input-group-addon">
+                                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                                </span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <a class="panel-heading collapsed" style="padding: 5px" role="tab"
+                                   id="headingThree" data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    状态
+                                </a>
+                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                     aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        <form action="" class="form-horizontal">
+                                            <div class="form-group">
+                                                <select class="form-control" name="post_status">
+                                                    <option value="1">已发布</option>
+                                                    <option value="2">草稿</option>
+                                                    <option value="3">等待复审</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of accordion -->
+
+                    </div>
+                </div>
+                <!--分类-->
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>分类</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form action="" class="form-horizontal form-label-left input_mask">
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-12 col-xs-12" id="cat_list">
+                                    <div class="checkbox">
+                                        <label>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <a href="javascript:void(0);" onclick="showAddCategory()">+添加新分类</a>
+                        <div class="ln_solid"></div>
+                        <form class="form-horizontal form-label-left input_mask" style="display: none;"
+                              id="add_cat_form">
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" name="new_cat_name" class="form-control" placeholder="填写分类名称">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <select class="select2_single form-control" tabindex="-1" name="cat_parent_id">
+                                        <option value="-1">选择父分类</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <button type="button" class="btn btn-success" onclick="submitAddCategory()">添加
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--标签-->
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>标签</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form class="">
+
+                            <div class="control-group">
+                                <label class="control-label col-md-12 col-sm-12 col-xs-12">添加标签</label>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <input id="tags_1" type="text" class="tags form-control" name="tag_name"
+                                           value=""/>
+                                           </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-12 col-sm-12 col-xs-12">选择已有标签</label>
+                                <div class="col-md-8 col-sm-8 col-xs-8">
+                                    <select class="select2_single form-control" tabindex="-1" id="tag_list">
+                                    </select>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-2">
+                                    <button type="button" class="btn btn-success" onclick="selectTag()">添加</button>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <!--封面-->
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>封面</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br/>
+                        <a href="">设置特色图片</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</block>
+
+<block name="script_extra">
+    <!-- editormd -->
+    <script src="__PUBLIC__/vendors/editormd/editormd.js"></script>
+    <script type="text/javascript">
+
+        $('#myDatepicker4').datetimepicker({
+            ignoreReadonly: true,
+            allowInputToggle: true,
+            format: 'YYYY-MM-DD HH:mm:ss', //控件中from和to 显示的日期格式
+        });
+        function setDatetime(){
+            var date = new Date();
+            var day = date.getDay();
+            var month = date.getMonth();
+            var year = date.getFullYear();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            if(day<10){
+                day = '0'+day;
+            }
+            if(month<10){
+                month = '0'+month;
+            }
+            if(hours<10){
+                hours = '0'+hours;
+            }
+            if(minutes<10){
+                minutes = '0'+minutes;
+            }
+            if(seconds<10){
+                seconds = '0'+seconds;
+            }
+            $('#myDatepicker4 input[name="post_date"]').val(year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds);
+        }
+
+
+        /* editormd */
+        var testEditor;
+        function init_editormd() {
+            testEditor = editormd("test-editormd", {
+                width: "100%",
+                height : 640,
+                path: '__PUBLIC__/vendors/editormd/lib/',
+                saveHTMLToTextarea : true,
+                onload : function() {
+
+                    <switch name="Think.ACTION_NAME">
+                        <case value="edit">loadPost();</case>
+                        <default />
+                    </switch>
+                }
+            });
+            //testEditor.getMarkdown();       // 获取 Markdown 源码
+            //testEditor.getHTML();           // 获取 Textarea 保存的 HTML 源码
+            //testEditor.getPreviewedHTML();  // 获取预览窗口里的 HTML，在开启 watch 且没有开启 saveHTMLToTextarea 时使用
+        }
+
+        /* AUTOSIZE */
+        function init_autosize() {
+
+            if (typeof $.fn.autosize !== 'undefined') {
+
+                autosize($('.resizable_textarea'));
+
+            }
+
+        }
+        ;
+
+        /* TAG INPUT */
+        function onAddTag(tag) {
+            alert("Added a tag: " + tag);
+        }
+
+        function onRemoveTag(tag) {
+            alert("Removed a tag: " + tag);
+        }
+
+        function onChangeTag(input, tag) {
+            alert("Changed a tag: " + tag);
+        }
+
+        //tags input
+        function init_TagsInput() {
+
+            if (typeof $.fn.tagsInput !== 'undefined') {
+
+                $('#tags_1').tagsInput({
+                    width: 'auto'
+                });
+
+            }
+
+        }
+        function enablePassInput() {
+            
+            $.each($('input:radio[name="post_private"]'),function(index,item){
+                item.onchange = function(){
+                    var val = $('input:radio[name="post_private"]:checked').val();
+                    if (val=='2') {
+                        $("input[name='post_password']").show();
+                    }else{
+                        $("input[name='post_password']").hide();
+                    }
+                }
+            })
+               
+        }
+
+
+
+
+        //新增分类操作
+        function showAddCategory() {
+            $("#add_cat_form").slideToggle("fast");
+        }
+        function resetAddCategory() {
+            $("#add_cat_form input[name='new_cat_name']").val('');
+            $("#add_cat_form select[name='cat_parent_id']").val('-1');
+        }
+        function submitAddCategory() {
+
+            var jsonData = {
+                "cat_name": $("#add_cat_form input[name='new_cat_name']").val(),
+                "cat_parent_id": $("#add_cat_form select[name='cat_parent_id']").val(),
+            };
+            jsonData.cat_parent_id == '-1' ? delete jsonData.cat_parent_id : '';
+            $.ajax({
+                type: "post",
+                url: "{:U('blog_category/add')}",
+                data: jsonData,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == 1) {
+                        flushCategoryList();
+                        resetAddCategory();
+
+                    }
+                    alert(data.msg);
+                },
+                error: function (error) {
+                    alert("服务器异常");
+                }
+            });
+
+        }
+        //刷新添加分类显示列表
+        function flushCategoryList() {
+            $.ajax({
+                type: "post",
+                url: "{:U('blog_category/getAll')}",
+                data: '',
+                dataType: "json",
+                success: function (category_respones) {
+                    if (category_respones.status == 1) {
+                        var category_data = category_respones.data;
+                        $("#add_cat_form select[name='cat_parent_id']").html("<option value='-1'>选择父级分类</option>");
+
+                        $("#cat_list").html("");
+                        $.each(category_data, function (i, cat_item) {
+                            $("#add_cat_form select[name='cat_parent_id']").append("<option value=" + cat_item.cat_id + ">" + cat_item.cat_name + "</option>");
+                            $("#cat_list").append("<div class='checkbox'><label><input type='checkbox' value=" +
+                                cat_item.cat_id + " name='cat_id'> " +
+                                cat_item.cat_name + "</label></div>");
+                        });
+
+                    } else {
+                        alert("服务器异常");
+                    }
+                },
+                error: function (error) {
+                    alert("服务器异常");
+                }
+
+            });
+        }
+        function flushTagList() {
+            $.ajax({
+                type: "post",
+                url: "{:U('blog_tag/getAll')}",
+                data: '',
+                dataType: "json",
+                success: function (tag_respones) {
+                    if (tag_respones.status == 1) {
+                        var tag_data = tag_respones.data;
+                        $("#tag_list").html("");
+                        $.each(tag_data, function (i, tag_item) {
+                            $("#tag_list").append("<option value=" + tag_item.tag_name + ">" + tag_item.tag_name + "</option>");
+
+                        });
+
+                    } else {
+                        alert("服务器异常");
+                    }
+                },
+                error: function (error) {
+                    alert("服务器异常");
+                }
+
+            });
+        }
+        //选择已存在标签
+        function selectTag() {
+            var tag_arr = $('#tags_1').val().split(",");
+            for (var i in tag_arr) {
+                if (tag_arr[i] == $("#tag_list").val()) {
+                    return false;
+                }
+            }
+            $('#tags_1').addTag($("#tag_list").val());
+            ;
+        }
+
+        <switch name="Think.ACTION_NAME">
+            <case value="edit">
+                //加载将要编辑的文章信息
+                function loadPost() {
+                    var post_id = "{$Think.get.id}";
+                    $.ajax({
+                        type: "post",
+                        url: "{:U('blog_post/getItemById')}",
+                        data: {'post_id': post_id},
+                        dataType: "json",
+                        success: function (respones) {
+                            if (respones.status == 1) {
+                                $("input[name='post_title']").val(respones.data.post_title);
+                                testEditor.appendMarkdown(respones.data.post_content);
+                                $("input[name='post_private'][value='" + respones.data.post_private + "']").prop("checked", 'checked');
+                                if( $('input:radio[name="post_private"]:checked').val()=='2'){
+                                    $("input[name='post_password']").show();
+                                    $("input[name='post_password']").val(respones.data.post_password);
+                                }else{
+                                    $("input[name='post_password']").hide();
+                                }
+                                
+                                $("input[name='post_date']").val(respones.data.post_date);
+                                $("select[name='post_status']").val(respones.data.post_status);
+                                if(respones.data.cat_id){
+                                    $("input[name='cat_id']").val(respones.data.cat_id.split(','));
+                                }
+                                if(respones.data.tag_name){
+                                    $("input[name='tag_name']").importTags(respones.data.tag_name);
+                                }
+                            }
+                        }
+                    });
+                }
+                //对文章执 行更新
+                function updatePost() {
+                    var post_id = "{$Think.get.id}";
+                    var cat_id = [];
+                    $('input[name="cat_id"]:checked').each(function(){
+                        cat_id.push($(this).val());
+                    });
+                    var json_data = {
+                        'post_id': post_id,
+                        'post_title': $("input[name='post_title']").val(),
+                        'post_content':testEditor.getMarkdown(),
+                        'post_private': $("input[name='post_private']:checked").val(),
+                        'post_password':$("input[name='post_password']").val(),
+                        'post_date': $("input[name='post_date']").val(),
+                        'post_status': $("select[name='post_status']").val(),
+                        'cat_id': cat_id,
+                        'tag_name': $("input[name='tag_name']").val().split(','),
+                    }
+                    $.ajax({
+                        type: "post",
+                        url: "{:U('blog_post/update')}",
+                        data: json_data,
+                        dataType: "json",
+                        success: function (respones) {
+                            if (respones.status == 1) {
+                                alert("更新成功");
+                            }else{
+                                alert("更新失败");
+                            }
+                        }
+                    });
+                }
+
+                function delPost() {
+                    var post_id = "{$Think.get.id}";
+                    $.ajax({
+                        type: "post",
+                        url: "{:U('blog_post/del')}",
+                        data: {
+                            "post_id":post_id
+                        },
+                        dataType: "json",
+                        success: function (respones) {
+                            if (respones.status == 1) {
+                                alert("删除成功");
+                                window.location.replace("{:U('blog_post/create')}");
+                            }else{
+                                alert("删除失败");
+                            }
+                        }
+                    });
+                }
+            </case>
+            <default />
+                function publicPost(){
+                    var cat_id = [];
+                    $('input[name="cat_id"]:checked').each(function(){
+                        cat_id.push($(this).val());
+                    });
+                    var json_data = {
+                        'post_title': $("input[name='post_title']").val(),
+                        'post_content':testEditor.getMarkdown(),
+                        'post_private': $("input[name='post_private']:checked").val(),
+                        'post_password':$("input[name='post_password']").val(),
+                        'post_date': $("input[name='post_date']").val(),
+                        'post_status': $("select[name='post_status']").val(),
+                        'cat_id': cat_id,
+                        'tag_name': $("input[name='tag_name']").val().split(','),
+                    }
+
+                    $.ajax({
+                        type: "post",
+                        url: "{:U('blog_post/store')}",
+                        data: json_data,
+                        dataType: "json",
+                        success: function (respones) {
+                            if (respones.status == 1) {
+                                var url = "{:U('blog_post/edit')}"
+                                window.location.replace(url+"?id="+respones.data);
+                            }
+                        }
+                    });
+                }
+
+
+        </switch>
+
+
+        $(document).ready(function () {
+            enablePassInput();
+            setDatetime();
+            flushCategoryList();
+            flushTagList();
+            init_editormd();
+            init_TagsInput();
+            init_autosize();
+
+        });
+    </script>
+</block>
